@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soru Sor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Soru Sor</h1>
+        <form action="/ask_question" method="POST" enctype="multipart/form-data">
+            <label for="title">Başlık: </label>
+            <input type="text" id="title" name="title" value="{{ baslik }}"  required>
+
+            <label for="content">İçerik:</label>
+            <textarea id="content" name="content" rows="6" required></textarea>
+
+            <label for="category">Kategori:</label>
+            <select id="category" name="category" required>
+                <option value="Python"  {{ P }}  >Python</option>
+                <option value="HTML5"   {{ H }}  >HTML5</option>
+                <option value="CSS"     {{ C }}  >CSS</option>
+                <option value="JavaScript" {{ J }}    >JavaScript</option>
+            </select>
+
+            <label for="image">Resim:</label>
+            <input type="file" id="image" name="image" accept=".png, .jpg">
+
+            <button type="submit">Gönder</button>
+        </form>
+    </div>
+</body>
+</html>

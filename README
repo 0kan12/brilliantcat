@@ -1,0 +1,67 @@
+Bu site şuanda açık ziyaret etmek için:https://1testing123.pythonanywhere.com/subject/1
+
+
+notlar;
+    -Klasörler:kullanıcıların resimleri için profile_pictures klasörü,soru-cevapdaki resimlerin depolanması için assets klasörü
+    -html kodları inline olarak yazılmıştır
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+mysql tablo yapıları:
+
+  users;
+  +--------------------+--------------+------+-----+----------+----------------+
+| Field              | Type         | Null | Key | Default  | Extra          |
++--------------------+--------------+------+-----+----------+----------------+
+| id                 | int          | NO   | PRI | NULL     | auto_increment |
+| username           | varchar(255) | NO   |     | NULL     |                |
+| email              | varchar(255) | NO   |     | NULL     |                |
+| password           | varchar(255) | NO   |     | NULL     |                |
+| verified           | tinyint(1)   | YES  |     | 0        |                |
+| verification_token | varchar(255) | YES  |     | NULL     |                |
+| user_cookie        | varchar(255) | YES  |     | NULL     |                |
+| puan               | int          | YES  |     | 20       |                |
+| image_link         | varchar(255) | YES  |     | user.png |                |
++--------------------+--------------+------+-----+----------+----------------+
+  questions (soru cevap sitesindeki sorular)
+  +------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int          | NO   | PRI | NULL    | auto_increment |
+| user_id    | int          | NO   | MUL | NULL    |                |
+| title      | varchar(255) | NO   |     | NULL    |                |
+| content    | text         | NO   |     | NULL    |                |
+| image_link | varchar(255) | YES  |     | NULL    |                |
+| category   | varchar(255) | NO   |     |         |                |
++------------+--------------+------+-----+---------+----------------+
+answers (soru cevap sitesindeki sorulara verilen cevaplar)
++----------------+--------------+------+-----+-------------------+-------------------+
+| Field          | Type         | Null | Key | Default           | Extra             |
++----------------+--------------+------+-----+-------------------+-------------------+
+| id             | int          | NO   | PRI | NULL              | auto_increment    |
+| question_id    | int          | NO   | MUL | NULL              |                   |
+| user_id        | int          | NO   | MUL | NULL              |                   |
+| content        | text         | NO   |     | NULL              |                   |
+| created_at     | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| image_link     | varchar(255) | YES  |     | NULL              |                   |
+| is_best_answer | tinyint(1)   | YES  |     | 0                 |                   |
++----------------+--------------+------+-----+-------------------+-------------------+
+subjects (ana sayfadaki eğitimler)
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| video    | varchar(100) | YES  |     | NULL    |                |
+| content1 | text         | YES  |     | NULL    |                |
+| content2 | text         | YES  |     | NULL    |                |
+| code     | text         | YES  |     | NULL    |                |
+| lang     | varchar(20)  | YES  |     | NULL    |                |
+| subject  | varchar(30)  | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+tests (eğitimlerin pekiştirme soruları)
++------------+------+------+-----+---------+-------+
+| Field      | Type | Null | Key | Default | Extra |
++------------+------+------+-----+---------+-------+
+| question   | text | YES  |     | NULL    |       |
+| answer     | text | YES  |     | NULL    |       |
+| subject_id | int  | YES  |     | NULL    |       |
++------------+------+------+-----+---------+-------+

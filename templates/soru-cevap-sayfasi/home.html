@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa</title>
+    <style>
+        :root {
+            --text: #031817;
+            --background: #f2fdfd;
+            --primary: #30e3e4;
+            --secondary: #80b0ee;
+            --accent: #587be9;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+        body {
+            font-family: "Raleway", sans-serif;
+            background-color: #fbfcfa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .sidebar {
+            flex: 0 0 200px;
+            padding: 20px;
+            background-color: #f3f4f2;
+            border-radius: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f3f4f2;
+            border-radius: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .user-info {
+            flex: 0 0 200px;
+            padding: 20px;
+            background-color: #f3f4f2; /* Açık mavi arka plan rengi */
+            border-radius: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+
+        .user-info p {
+            margin: 5px 0;
+        }
+
+        .user-label {
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .user-info,
+        .beta {
+            background-color: #f3f4f2;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .category-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-item {
+            margin-bottom: 10px;
+        }
+
+        .category-link {
+            display: block;
+            padding: 10px 16px;
+            color: #6c7068;
+            text-decoration: none;
+            background-color: transparent;
+            transition: background-color 0.3s;
+            border-radius: 40px;
+        }
+
+        .category-link:hover {
+            background-color: #e3eaec;
+            color: #12170b;
+        }
+
+        .question-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            list-style-type: none;
+        }
+
+        .question-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-title {
+            cursor: pointer;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .question-title:hover {
+            color: #555555;
+        }
+
+        .question-item::marker {
+            display: none;
+            text-decoration: none;
+        }
+
+        .ask-question-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: transparent;
+            color: #0b0b0b;
+            text-decoration: none;
+            border-radius: 20px;
+            border: 2px solid #181717;
+            transition: background-color 0.3s;
+            font-size: 18px; /* Buton yazı büyüklüğü */
+        }
+
+        .ask-question-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .dropbtn {
+            background-color: #ffffff;
+            color: #333;
+            padding: 10px 10px;
+            border: 2px solid var(#333);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .dropbtn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .alert {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        .alert.slide-down {
+            animation: slideDown 0.5s ease forwards;
+        }
+
+        .alert.slide-up {
+            animation: slideUp 0.5s ease forwards;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Kategoriler</h2>
+            <ul class="category-list">
+                {% for category in categories %}
+                    <li class="category-item">
+                        {% if category==current_category %}
+                        <a href="/?category={{ category }}" class="category-link" style="background-color: #e3eaec; color: #12170b;">{{ category }}</a>
+                        {% else %}
+                        <a href="/?category={{ category }}" class="category-link">{{ category }}</a>
+                        {%endif%}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="main-content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div id="flash-message" class="alert alert-{{ category }} slide-down">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+            <h1>Ana Sayfa</h1>
+            <ul class="question-list">
+                {% if questions %}
+                    {% for question in questions %}
+                        <li class="question-item">
+                            <a href="/question/{{ question.id }}" class="question-title"><strong>{{ question.title }}</strong></a><br>
+                            {{ question.content }}
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li class="question-item">
+                        <strong>Şimdilik burası boş..</strong>
+                    </li>
+                {% endif %}
+            </ul>
+            <a href="/ask_question" class="ask-question-btn">Soru Sor</a>
+        </div>
+        <div class="user-info">
+            {% if current_user %}
+                <div style=" align-items: center;" class="beta">
+                    <img src="/profile_pictures/{{ current_user.image_link }}" alt="Profil Resmi" style="width: 75px; height: 75px; border-radius: 50%; margin-right: 20px;">
+                    <div class="sigma">
+                        <p><span class="user-label">Kullanıcı Adı:</span> {{ current_user.username }}</p>
+                        <p><span class="user-label">Puan:</span> {{ current_user.puan }}</p>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button onclick="toggleDropdown()" class="dropbtn">Ayarlar</button>
+                    <div id="dropdownContent" class="dropdown-content">
+                        <a href="/logout">Çıkış Yap</a>
+                        <a href="/edit_profile">Profili Düzenle</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+
+        function toggleDropdown() {
+            document.getElementById("dropdownContent").classList.toggle("show");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        setTimeout(function() {
+            var flashMessage = document.getElementById("flash-message");
+            if (flashMessage) {
+                flashMessage.classList.remove('slide-down');
+                flashMessage.classList.add('slide-up');
+                setTimeout(function() {
+                    flashMessage.remove();
+                }, 500); // Wait for animation to finish before removing
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
